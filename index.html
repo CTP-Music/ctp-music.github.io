@@ -1479,12 +1479,23 @@
 
         /* ---------- Width: Nuke / Full toggle button, left of the theme picker —
            the same control as the CTPVerse Dashboard: the button shows the
-           current width and a click switches to the other one ---------- */
+           current width and a click switches to the other one. The choice is
+           remembered in localStorage, just like the theme, so it survives
+           page reloads ---------- */
         var widthBtn = document.getElementById('widthToggle');
-        function setWidth(mode){
+        var WIDTH_KEY = 'ctp-music-portal-width';
+        function applyWidth(mode){
           document.documentElement.setAttribute('data-width', mode);
           widthBtn.textContent = mode === 'full' ? 'WIDTH: Full' : 'WIDTH: Nuke';
         }
+        function setWidth(mode){
+          applyWidth(mode);
+          try{ localStorage.setItem(WIDTH_KEY, mode); }catch(e){}
+        }
+        try{
+          var savedWidth = localStorage.getItem(WIDTH_KEY);
+          if(savedWidth === 'full' || savedWidth === 'nuke'){ applyWidth(savedWidth); }
+        }catch(e){}
         widthBtn.addEventListener('click', function(){
           setWidth(document.documentElement.getAttribute('data-width') === 'full' ? 'nuke' : 'full');
         });
