@@ -629,7 +629,20 @@
         font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11.5px; padding:8px;
       }
       .bc-slot iframe{width:100%; border:0; display:block; margin-top:10px}
-      .form-msg{font-size:12px; margin-top:7px; min-height:1.2em}
+
+      /* Bandcamp — curated releases only (Alpha) */
+      .alpha-note{
+        border:1px solid var(--line); background:var(--blue-wash); padding:10px 11px; margin:10px 0;
+      }
+      .alpha-note b{color:var(--heading)}
+      .alpha-badge{
+        display:inline-block; background:var(--blue); color:#fff; font-size:10.5px; font-weight:bold;
+        letter-spacing:.07em; text-transform:uppercase; padding:3px 7px; margin-right:7px; vertical-align:1px;
+      }
+      .empty-releases{
+        border:1px dashed var(--border-soft); background:var(--blue-wash); padding:14px 12px; text-align:center;
+      }
+      .empty-releases b{font-family:Tahoma,Verdana,sans-serif; color:var(--heading); display:block; font-size:14px; margin-bottom:3px}
 
       footer.site-foot{
         margin-top:4px; border:1px solid var(--border-soft); background:var(--surface);
@@ -737,7 +750,7 @@
                 <li><a href="#featured">Featured Artist</a></li>
                 <li><a href="#radio-wall">Radio Wall<span class="hint">Every channel, one wall</span></a></li>
                 <li><a href="#poll">Community Poll</a></li>
-                <li><a href="#bandcamp">Bandcamp Artists<span class="hint">Releases &amp; artist pages</span></a></li>
+                <li><a href="#bandcamp">Bandcamp Artists<span class="hint">Curated releases only</span></a></li>
                 <li><a href="#directory">Channel Directory<span class="hint">channels.json</span></a></li>
                 <li><a href="#club">Club CTP<span class="hint">Membership tiers</span></a></li>
                 <li><a href="#roadmap">Roadmap<span class="hint">Phases 1 – 4</span></a></li>
@@ -831,7 +844,7 @@
             <div class="block-body">
               <ul class="feed">
                 <li><span class="tag">On Air</span><div><span class="ft">Psytrancelicious is broadcasting</span><p>Astral Projection's “Mahadeva” in rotation on the network's psytrance channel — the player in the right column is tuned to it.</p></div></li>
-                <li><span class="tag">Featured</span><div><span class="ft">Cosmic Echoes takes the Featured Artist slot</span><p>The first artist spotlight on the portal. Releases land in the Bandcamp layer below as their embed codes come in.</p></div></li>
+                <li><span class="tag">Featured</span><div><span class="ft">Cosmic Echoes takes the Featured Artist slot</span><p>The first artist spotlight on the portal. Artist releases in the Bandcamp layer below are curated by the portal team. Artist submissions are closed during Alpha.</p></div></li>
                 <li><span class="tag">New</span><div><span class="ft">The Radio Wall is up: ten channels</span><p>Nine concept channels from the portal designs plus CTP Ambient &amp; C-Domain from the channel directory. Click any channel to pull up its player — Psytrancelicious plays live now; the rest switch on as their laut.fm stream codes drop into the directory.</p></div></li>
                 <li><span class="tag">Poll</span><div><span class="ft">Community poll is open</span><p>Favorite electronic subgenre — cast a vote below and see where the community lands.</p></div></li>
                 <li><span class="tag">Club</span><div><span class="ft">Club CTP tiers published</span><p>Five tiers, Explorer to Founder Circle — the membership and identity layer of the whole CTP ecosystem.</p></div></li>
@@ -868,20 +881,23 @@
             </div>
           </section>
 
-          <section class="block" id="bandcamp" aria-label="Bandcamp artist layer">
-            <div class="block-title">Bandcamp — Artist Ecosystem</div>
+          <section class="block" id="bandcamp" aria-label="Bandcamp curated artist releases">
+            <div class="block-title">Bandcamp — Curated Artist Releases</div>
             <div class="block-body">
-              <h2 class="sec">Releases land here</h2>
-              <p>Bandcamp is the portal's artist layer: releases, artist pages and direct support. No releases are loaded yet — when an artist's Bandcamp embed code arrives, it drops into the box below and the official Bandcamp player renders right here, one per release, stacked as deep as the wall needs.</p>
-              <div id="bcStack" class="bc-slot"></div>
-              <h3 class="sub">Drop in a Bandcamp embed code</h3>
-              <label class="small muted" for="bcInput">Paste the full embed code from a Bandcamp release (Share / Embed), or the EmbeddedPlayer URL:</label>
-              <textarea class="code-in" id="bcInput" placeholder="&lt;iframe style=&quot;border: 0; width: 350px; height: 470px;&quot; src=&quot;https://bandcamp.com/EmbeddedPlayer/album=…&quot; seamless&gt;…&lt;/iframe&gt;" style="margin-top:6px"></textarea>
-              <div class="btn-row">
-                <button type="button" class="btn btn-primary" id="bcLoad">Load Bandcamp Player</button>
-                <button type="button" class="btn" id="bcClear">Clear</button>
+              <h2 class="sec">Curated releases only</h2>
+              <p>Bandcamp is the portal's artist layer: releases, artist pages and direct support for the artist. Every player in this section is selected and added by the portal team — there is no public submission or upload route on this page.</p>
+
+              <div class="alpha-note">
+                <p style="margin:0"><span class="alpha-badge">Alpha</span><b>Artist submissions are closed during Alpha.</b> How submissions will be structured is still being decided, so nothing can be submitted here yet. This section carries curated releases only until that structure is in place.</p>
               </div>
-              <p class="form-msg" id="bcMsg" role="status"></p>
+
+              <h3 class="sub">Curated releases</h3>
+              <div id="bcStack" class="bc-slot">
+                <div class="empty-releases">
+                  <b>No curated releases published yet</b>
+                  <span class="small muted">The first curated Bandcamp players, selected by the portal team, will appear here.</span>
+                </div>
+              </div>
             </div>
           </section>
 
@@ -928,7 +944,7 @@
                 <li><b>Experience layer</b> — this portal, a static site on GitHub Pages (Vercel later, if community and database elements call for it).</li>
                 <li><b>Media infrastructure</b> — Cloudflare R2 object storage with CDN delivery for CTP's own audio assets.</li>
                 <li><b>Internet radio layer</b> — laut.fm streams, wired in through channels.json.</li>
-                <li><b>Artist ecosystem layer</b> — Bandcamp releases and artist pages, embedded above.</li>
+                <li><b>Artist ecosystem layer</b> — Bandcamp releases and artist pages — the curated releases above.</li>
                 <li><b>Membership layer</b> — Club CTP identity, access and tiers.</li>
               </ul>
               <p style="margin-top:8px">Separating the layers keeps the portal lean, secure and cheap to run — and free to scale when the community does.</p>
@@ -939,7 +955,7 @@
             <div class="block-title">Roadmap</div>
             <div class="block-body">
               <div class="phases">
-                <div class="phase"><b>Phase 1 — Foundation</b>Launch a fully functional CTP Music ecosystem.<ul><li>GitHub Pages portal</li><li>Custom player + Radio Wall</li><li>laut.fm + Bandcamp integration</li><li>Initial artist pages &amp; media library</li><li>Club CTP foundation</li></ul></div>
+                <div class="phase"><b>Phase 1 — Foundation</b>Launch a fully functional CTP Music ecosystem.<ul><li>GitHub Pages portal</li><li>Custom player + Radio Wall</li><li>laut.fm streams + curated Bandcamp releases</li><li>Initial artist pages &amp; media library</li><li>Club CTP foundation</li></ul></div>
                 <div class="phase"><b>Phase 2 — Community</b>Increase participation, convert visitors into members.<ul><li>Member profiles</li><li>Community features</li><li>Artist promotion tools</li><li>Events</li><li>Premium content</li></ul></div>
                 <div class="phase"><b>Phase 3 — Monetization</b>Develop the revenue engines.<ul><li>Membership tiers live</li><li>Advertising &amp; sponsorships</li><li>Artist services</li><li>Commerce — the Marketplace</li></ul></div>
                 <div class="phase"><b>Phase 4 — Ecosystem Integration</b>Connect the CTP platforms.<ul><li>CTP-EOS integration</li><li>CTP University</li><li>CTP computer systems</li><li>Future digital experiences</li></ul></div>
@@ -1288,41 +1304,6 @@
           for (var i=0;i<inputs.length;i++) inputs[i].disabled = true;
         });
 
-        /* ---------- Bandcamp drop-in embeds ---------- */
-        var bcStack = byId('bcStack'), bcMsg = byId('bcMsg');
-        function loadBandcamp(){
-          var raw = byId('bcInput').value.trim();
-          if (!raw){ bcMsg.textContent = 'Paste a Bandcamp embed code first.'; return; }
-          var m = raw.match(/(album|track)=(\d+)/);
-          if (!m){ bcMsg.textContent = 'No album or track ID found in that code — grab it from the release’s Share / Embed menu on Bandcamp.'; return; }
-          function pick(re, dflt){ var mm = raw.match(re); return mm ? mm[1] : dflt; }
-          var bgcol = pick(/bgcol=([0-9a-fA-F]{6})/, '333333');
-          var linkcol = pick(/linkcol=([0-9a-fA-F]{6})/, '0f91ff');
-          var size = pick(/size=(large|small)/, 'large');
-          var tracklist = /tracklist=true/.test(raw);
-          var hMatch = raw.match(/height:\s*(\d+)px/) || raw.match(/height="(\d+)"/);
-          var height = hMatch ? parseInt(hMatch[1], 10) : (tracklist ? 470 : 120);
-          var src = 'https://bandcamp.com/EmbeddedPlayer/' + m[1] + '=' + m[2] +
-                    '/size=' + size + '/bgcol=' + bgcol + '/linkcol=' + linkcol +
-                    '/tracklist=' + (tracklist ? 'true' : 'false') + '/transparent=true/';
-          var wrap = document.createElement('div');
-          var frame = document.createElement('iframe');
-          frame.src = src; frame.height = height; frame.setAttribute('seamless', '');
-          frame.title = 'Bandcamp player';
-          frame.setAttribute('loading', 'lazy');
-          var rm = document.createElement('button');
-          rm.type = 'button'; rm.className = 'btn'; rm.textContent = 'Remove player';
-          rm.style.marginTop = '6px';
-          rm.addEventListener('click', function(){ wrap.remove(); });
-          wrap.appendChild(frame); wrap.appendChild(rm);
-          bcStack.appendChild(wrap);
-          byId('bcInput').value = '';
-          bcMsg.textContent = 'Bandcamp player loaded.';
-        }
-        byId('bcLoad').addEventListener('click', loadBandcamp);
-        byId('bcClear').addEventListener('click', function(){
-          byId('bcInput').value = ''; bcMsg.textContent = '';
-        });
       })();
     </script>
   </body>
