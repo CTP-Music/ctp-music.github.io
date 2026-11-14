@@ -405,12 +405,15 @@
       a:hover{color:var(--link-hover); text-decoration:underline}
       img{max-width:100%}
       :focus-visible{outline:2px solid var(--line); outline-offset:2px}
-      /* Page width adjuster values — Standard is the original 1460px */
-      :root, :root[data-width="standard"]{--page-max:1460px}
-      :root[data-width="compact"]{--page-max:1100px}
-      :root[data-width="wide"]{--page-max:1760px}
+      /* Page width adjuster values — the same two modes as the CTPVerse
+         Dashboard: Nuke is the classic 1180px width the page loads at, and
+         Full removes the cap and widens both side columns to 280px */
+      :root, :root[data-width="nuke"]{--page-max:1180px}
       :root[data-width="full"]{--page-max:none}
       .wrap{max-width:var(--page-max); margin:0 auto; padding:8px}
+      @media (min-width:1081px){
+        :root[data-width="full"] .layout{grid-template-columns:280px minmax(0,1fr) 280px}
+      }
 
       /* Header band */
       .site-head{
@@ -823,9 +826,7 @@
         <a href="https://muse.ai/join" target="_blank" rel="noopener">Support CTP dev — try Muse</a>
         <label class="theme-pick width-pick">Width
           <select id="widthSelect" aria-label="Page width">
-            <option value="compact">Compact</option>
-            <option value="standard" selected>Standard</option>
-            <option value="wide">Wide</option>
+            <option value="nuke" selected>Nuke</option>
             <option value="full">Full width</option>
           </select>
         </label>
@@ -1481,7 +1482,7 @@
           document.documentElement.setAttribute('data-theme', themeSelect.value);
         });
 
-        /* ---------- Width: page max-width adjuster, right of the theme picker ---------- */
+        /* ---------- Width: page max-width adjuster, left of the theme picker ---------- */
         var widthSelect = document.getElementById('widthSelect');
         widthSelect.addEventListener('change', function(){
           document.documentElement.setAttribute('data-width', widthSelect.value);
