@@ -452,9 +452,9 @@
         background:var(--input-bg); color:var(--text); border:1px solid var(--border-soft);
         font:inherit; font-size:12.5px; padding:4px 6px; max-width:230px;
       }
-      /* Width adjuster — sits directly left of the theme picker */
-      .width-pick{margin-left:auto}
-      .width-pick select{max-width:150px}
+      /* Width toggle button — sits directly left of the theme picker,
+         same control as the CTPVerse Dashboard */
+      .width-btn{margin-left:auto}
 
       /* Three-column layout */
       .layout{display:grid; grid-template-columns:196px minmax(0,1fr) 252px; gap:10px; margin-top:10px; align-items:start}
@@ -824,12 +824,7 @@
         <a href="#club">Club CTP</a>
         <a href="#ecosystem">Ecosystem</a>
         <a href="https://muse.ai/join" target="_blank" rel="noopener">Support CTP dev — try Muse</a>
-        <label class="theme-pick width-pick">Width
-          <select id="widthSelect" aria-label="Page width">
-            <option value="nuke" selected>Nuke</option>
-            <option value="full">Full width</option>
-          </select>
-        </label>
+        <button class="btn width-btn" id="widthToggle" type="button" title="Toggle page width: classic Nuke or full spread">WIDTH: Nuke</button>
         <label class="theme-pick">Theme
           <select id="themeSelect" aria-label="Portal theme">
             <option value="eos" selected>CTP-EOS Cynamic</option>
@@ -1482,10 +1477,16 @@
           document.documentElement.setAttribute('data-theme', themeSelect.value);
         });
 
-        /* ---------- Width: page max-width adjuster, left of the theme picker ---------- */
-        var widthSelect = document.getElementById('widthSelect');
-        widthSelect.addEventListener('change', function(){
-          document.documentElement.setAttribute('data-width', widthSelect.value);
+        /* ---------- Width: Nuke / Full toggle button, left of the theme picker —
+           the same control as the CTPVerse Dashboard: the button shows the
+           current width and a click switches to the other one ---------- */
+        var widthBtn = document.getElementById('widthToggle');
+        function setWidth(mode){
+          document.documentElement.setAttribute('data-width', mode);
+          widthBtn.textContent = mode === 'full' ? 'WIDTH: Full' : 'WIDTH: Nuke';
+        }
+        widthBtn.addEventListener('click', function(){
+          setWidth(document.documentElement.getAttribute('data-width') === 'full' ? 'nuke' : 'full');
         });
 
         /* ---------- Internal channel data ----------
