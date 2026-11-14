@@ -405,7 +405,12 @@
       a:hover{color:var(--link-hover); text-decoration:underline}
       img{max-width:100%}
       :focus-visible{outline:2px solid var(--line); outline-offset:2px}
-      .wrap{max-width:1460px; margin:0 auto; padding:8px}
+      /* Page width adjuster values — Standard is the original 1460px */
+      :root, :root[data-width="standard"]{--page-max:1460px}
+      :root[data-width="compact"]{--page-max:1100px}
+      :root[data-width="wide"]{--page-max:1760px}
+      :root[data-width="full"]{--page-max:none}
+      .wrap{max-width:var(--page-max); margin:0 auto; padding:8px}
 
       /* Header band */
       .site-head{
@@ -439,11 +444,14 @@
         padding:8px 10px; display:inline-block; min-height:2.25rem; box-sizing:border-box;
       }
       .nav-strip a:hover{color:#ffffff; background:rgba(255,255,255,.14); text-decoration:none}
-      .theme-pick{margin-left:auto; display:flex; align-items:center; gap:8px; color:#ffffff; font-size:12px; padding:2px 0}
+      .theme-pick{margin-left:0; display:flex; align-items:center; gap:8px; color:#ffffff; font-size:12px; padding:2px 0}
       .theme-pick select{
         background:var(--input-bg); color:var(--text); border:1px solid var(--border-soft);
         font:inherit; font-size:12.5px; padding:4px 6px; max-width:230px;
       }
+      /* Width adjuster — sits directly left of the theme picker */
+      .width-pick{margin-left:auto}
+      .width-pick select{max-width:150px}
 
       /* Three-column layout */
       .layout{display:grid; grid-template-columns:196px minmax(0,1fr) 252px; gap:10px; margin-top:10px; align-items:start}
@@ -813,6 +821,14 @@
         <a href="#club">Club CTP</a>
         <a href="#ecosystem">Ecosystem</a>
         <a href="https://muse.ai/join" target="_blank" rel="noopener">Support CTP dev — try Muse</a>
+        <label class="theme-pick width-pick">Width
+          <select id="widthSelect" aria-label="Page width">
+            <option value="compact">Compact</option>
+            <option value="standard" selected>Standard</option>
+            <option value="wide">Wide</option>
+            <option value="full">Full width</option>
+          </select>
+        </label>
         <label class="theme-pick">Theme
           <select id="themeSelect" aria-label="Portal theme">
             <option value="eos" selected>CTP-EOS Cynamic</option>
@@ -1463,6 +1479,12 @@
         var themeSelect = document.getElementById('themeSelect');
         themeSelect.addEventListener('change', function(){
           document.documentElement.setAttribute('data-theme', themeSelect.value);
+        });
+
+        /* ---------- Width: page max-width adjuster, right of the theme picker ---------- */
+        var widthSelect = document.getElementById('widthSelect');
+        widthSelect.addEventListener('change', function(){
+          document.documentElement.setAttribute('data-width', widthSelect.value);
         });
 
         /* ---------- Internal channel data ----------
