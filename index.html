@@ -617,17 +617,6 @@
       .phase b{font-family:Tahoma,Verdana,sans-serif; color:var(--heading); display:block; margin-bottom:4px}
       .phase ul{margin:5px 0 0; padding-left:16px; font-size:12.5px}
 
-      /* JSON directory */
-      .json-box{
-        background:var(--input-bg); border:1px solid var(--border-faint); padding:10px;
-        font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11px; line-height:1.5;
-        white-space:pre; overflow:auto; max-height:330px; margin:0;
-      }
-      textarea.code-in{
-        width:100%; box-sizing:border-box; min-height:74px; resize:vertical;
-        background:var(--input-bg); color:var(--text); border:1px solid var(--border-soft);
-        font-family:ui-monospace,Menlo,Consolas,monospace; font-size:11.5px; padding:8px;
-      }
       .bc-slot iframe{width:100%; border:0; display:block; margin-top:10px}
 
       /* Bandcamp — curated releases only (Alpha) */
@@ -659,7 +648,6 @@
         .col-right .block{margin-bottom:10px}
       }
       @media (max-width:700px){
-        .json-box{white-space:pre-wrap; word-break:break-word}
         .layout{display:flex; flex-direction:column}
         .col{width:100%}
         .col-center{order:1}
@@ -697,7 +685,7 @@
       <nav class="nav-strip" aria-label="Portal sections">
         <a href="#top">Home</a>
         <a href="#radio-wall">Radio Wall</a>
-        <a href="#directory">Channels</a>
+        <a href="#radio-wall">Channels</a>
         <a href="#bandcamp">Bandcamp</a>
         <a href="#club">Club CTP</a>
         <a href="#ecosystem">Ecosystem</a>
@@ -751,7 +739,6 @@
                 <li><a href="#radio-wall">Radio Wall<span class="hint">Every channel, one wall</span></a></li>
                 <li><a href="#poll">Community Poll</a></li>
                 <li><a href="#bandcamp">Bandcamp Artists<span class="hint">Curated releases only</span></a></li>
-                <li><a href="#directory">Channel Directory<span class="hint">channels.json</span></a></li>
                 <li><a href="#club">Club CTP<span class="hint">Membership tiers</span></a></li>
                 <li><a href="#roadmap">Roadmap<span class="hint">Phases 1 – 4</span></a></li>
               </ul>
@@ -761,8 +748,8 @@
           <section class="block" aria-label="Radio channels">
             <div class="block-title">Radio Channels</div>
             <div class="block-body" style="padding:4px 10px">
-              <div id="chanMenu"><!-- channel buttons built from channels.json data --></div>
-              <p class="small muted" style="margin:8px 0 4px">Pick a channel — it loads straight into the CTP Radio Player. Green dot: live stream. Grey dot: in the directory, awaiting its stream code.</p>
+              <div id="chanMenu"><!-- channel buttons built from the internal channel data --></div>
+              <p class="small muted" style="margin:8px 0 4px">Pick a channel — it loads straight into the CTP Radio Player. Green dot: live stream. Grey dot: coming soon.</p>
             </div>
           </section>
 
@@ -845,7 +832,7 @@
               <ul class="feed">
                 <li><span class="tag">On Air</span><div><span class="ft">Psytrancelicious is broadcasting</span><p>Astral Projection's “Mahadeva” in rotation on the network's psytrance channel — the player in the right column is tuned to it.</p></div></li>
                 <li><span class="tag">Featured</span><div><span class="ft">Cosmic Echoes takes the Featured Artist slot</span><p>The first artist spotlight on the portal. Artist releases in the Bandcamp layer below are curated by the portal team. Artist submissions are closed during Alpha.</p></div></li>
-                <li><span class="tag">New</span><div><span class="ft">The Radio Wall is up: ten channels</span><p>Nine concept channels from the portal designs plus CTP Ambient &amp; C-Domain from the channel directory. Click any channel to pull up its player — Psytrancelicious plays live now; the rest switch on as their laut.fm stream codes drop into the directory.</p></div></li>
+                <li><span class="tag">New</span><div><span class="ft">The Radio Wall is up: ten channels</span><p>Ten channels on one wall, from psytrance and ambient to synthwave, talk and classical. Click any channel to pull up its player — Psytrancelicious plays live now; the rest will switch on as their streams go live.</p></div></li>
                 <li><span class="tag">Poll</span><div><span class="ft">Community poll is open</span><p>Favorite electronic subgenre — cast a vote below and see where the community lands.</p></div></li>
                 <li><span class="tag">Club</span><div><span class="ft">Club CTP tiers published</span><p>Five tiers, Explorer to Founder Circle — the membership and identity layer of the whole CTP ecosystem.</p></div></li>
               </ul>
@@ -876,8 +863,8 @@
             <div class="block-title">Radio Wall</div>
             <div class="block-body">
               <h2 class="sec">Every channel on one wall</h2>
-              <p>Click a channel card and that channel's player comes up — stream, genre and now-playing, ready to listen. Channels with a laut.fm stream code in the directory play live; the rest are on the wall ready for their stream codes to drop in.</p>
-              <div class="wall" id="chanWall" style="margin-top:10px"><!-- channel cards built from channels.json data --></div>
+              <p>Click a channel card and that channel's player comes up — stream, genre and now-playing, ready to listen. Live channels play straight away; the rest are on the wall and coming soon.</p>
+              <div class="wall" id="chanWall" style="margin-top:10px"><!-- channel cards built from the internal channel data --></div>
             </div>
           </section>
 
@@ -897,19 +884,6 @@
                   <b>No curated releases published yet</b>
                   <span class="small muted">The first curated Bandcamp players, selected by the portal team, will appear here.</span>
                 </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="block" id="directory" aria-label="Channel directory">
-            <div class="block-title">Channel Directory — channels.json</div>
-            <div class="block-body">
-              <p>The portal runs on a static channel directory: one JSON file points every menu, wall card and the player at its stream. Paste a laut.fm stream URL into any channel's <b>stream_url</b> and that channel goes live everywhere on the portal at once.</p>
-              <pre class="json-box" id="channelsJson" aria-label="channels.json contents"></pre>
-              <div class="btn-row">
-                <button type="button" class="btn" id="copyJson">Copy channels.json</button>
-                <button type="button" class="btn" id="dlJson">Download channels.json</button>
-                <span class="small muted" id="jsonMsg" role="status"></span>
               </div>
             </div>
           </section>
@@ -943,7 +917,7 @@
               <ul style="margin:0; padding-left:17px">
                 <li><b>Experience layer</b> — this portal, a static site on GitHub Pages (Vercel later, if community and database elements call for it).</li>
                 <li><b>Media infrastructure</b> — Cloudflare R2 object storage with CDN delivery for CTP's own audio assets.</li>
-                <li><b>Internet radio layer</b> — laut.fm streams, wired in through channels.json.</li>
+                <li><b>Internet radio layer</b> — laut.fm streams powering the Radio Wall and the player.</li>
                 <li><b>Artist ecosystem layer</b> — Bandcamp releases and artist pages — the curated releases above.</li>
                 <li><b>Membership layer</b> — Club CTP identity, access and tiers.</li>
               </ul>
@@ -1002,7 +976,6 @@
                 <li><span>Radio</span><span>laut.fm</span></li>
                 <li><span>Media</span><span>Cloudflare R2</span></li>
                 <li><span>Artists</span><span>Bandcamp</span></li>
-                <li><span>Directory</span><span>channels.json</span></li>
               </ul>
             </div>
           </section>
@@ -1050,10 +1023,9 @@
           document.documentElement.setAttribute('data-theme', themeSelect.value);
         });
 
-        /* ---------- Channel directory (channels.json) ----------
-           One data source drives the left menu, the Radio Wall and the player.
-           Drop a laut.fm stream URL into any channel's stream_url and it goes
-           live across the whole portal. */
+        /* ---------- Internal channel data ----------
+           One internal data source drives the left menu, the Radio Wall and
+           the player. It is not displayed on the page. */
         var DIRECTORY = {
           network: "CTP Music",
           description: "Techno-spiritual underground & Conscious Translational Physics audio network",
@@ -1126,7 +1098,7 @@
           var cb = document.createElement('span'); cb.className='cg'; cb.textContent = ch.blurb;
           var cs = document.createElement('span');
           cs.className = 'cs ' + (ch.stream_url ? 'cs-live' : 'cs-pend');
-          cs.textContent = ch.stream_url ? '● Live stream — open player' : '○ Stream code pending';
+          cs.textContent = ch.stream_url ? '● Live stream — open player' : '○ Coming soon';
           card.appendChild(cn); card.appendChild(cg); card.appendChild(cb); card.appendChild(cs);
           card.addEventListener('click', function(){ loadChannel(ch.id, true); });
           wall.appendChild(card);
@@ -1195,14 +1167,14 @@
           } else {
             audio.pause(); audio.removeAttribute('src'); audio.load();
             setPlayingUI(false);
-            byId('pSource').textContent = 'channels.json — stream_url not set yet';
+            byId('pSource').textContent = 'Stream coming soon';
             byId('npTrack').innerHTML = '';
             var d = document.createElement('div'); d.textContent = ch.blurb;
             var hint = document.createElement('div'); hint.className = 'muted small';
-            hint.textContent = 'This channel is on the wall and in the directory. Drop its laut.fm stream code into channels.json and it plays from here.';
+            hint.textContent = 'This channel is on the wall and coming soon — its stream will play from here once it is live.';
             byId('npTrack').appendChild(d); byId('npTrack').appendChild(hint);
-            setStatus('Awaiting stream code');
-            setState('In directory');
+            setStatus('Coming soon');
+            setState('Coming soon');
           }
 
           /* pull the player up: flash it, and scroll to it where it sits off-screen */
@@ -1215,7 +1187,7 @@
 
         playBtn.addEventListener('click', function(){
           if (!current){ loadChannel('ctp-01', true); return; }
-          if (!current.stream_url){ setStatus('Awaiting stream code — nothing to play yet'); return; }
+          if (!current.stream_url){ setStatus('Coming soon — nothing to play yet'); return; }
           if (audio.paused){
             if (!audio.getAttribute('src')) audio.src = current.stream_url;
             audio.play().catch(function(){ setStatus('Press play to listen'); });
@@ -1236,7 +1208,7 @@
         audio.addEventListener('waiting', function(){ setState('Buffering…'); });
         audio.addEventListener('pause', function(){ setPlayingUI(false); if (audio.getAttribute('src')){ setState('Paused'); setStatus('Paused'); } });
         audio.addEventListener('error', function(){
-          if (audio.getAttribute('src')){ setPlayingUI(false); setState('Offline'); setStatus('Stream unavailable — check the stream code in channels.json'); }
+          if (audio.getAttribute('src')){ setPlayingUI(false); setState('Offline'); setStatus('Stream unavailable right now — please try again later'); }
         }, true);
 
         /* Listen Live / featured buttons */
@@ -1247,29 +1219,6 @@
 
         /* Default channel, loaded paused */
         loadChannel('ctp-01', false);
-
-        /* ---------- Channel Directory (JSON) panel ---------- */
-        var publicDir = { network: DIRECTORY.network, description: DIRECTORY.description,
-          channels: DIRECTORY.channels.map(function(ch){
-            return { id: ch.id, name: ch.name, genre: ch.genre, stream_url: ch.stream_url, format: ch.format };
-          }) };
-        var jsonText = JSON.stringify(publicDir, null, 2);
-        byId('channelsJson').textContent = jsonText;
-        byId('copyJson').addEventListener('click', function(){
-          var msg = byId('jsonMsg');
-          function done(){ msg.textContent = 'Copied.'; setTimeout(function(){ msg.textContent=''; }, 2500); }
-          if (navigator.clipboard && navigator.clipboard.writeText){
-            navigator.clipboard.writeText(jsonText).then(done).catch(function(){ msg.textContent = 'Copy blocked — select the text above instead.'; });
-          } else { msg.textContent = 'Select the text above to copy.'; }
-        });
-        byId('dlJson').addEventListener('click', function(){
-          var blob = new Blob([jsonText], { type:'application/json' });
-          var url = URL.createObjectURL(blob);
-          var a = document.createElement('a');
-          a.href = url; a.download = 'channels.json';
-          document.body.appendChild(a); a.click(); document.body.removeChild(a);
-          setTimeout(function(){ URL.revokeObjectURL(url); }, 4000);
-        });
 
         /* ---------- Community poll (this session only) ---------- */
         var pollCounts = { "Psytrance":0, "IDM":0, "Ambient":0, "Synthwave":0, "Industrial":0, "Dark Ambient":0 };
