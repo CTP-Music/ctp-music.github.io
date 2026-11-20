@@ -557,22 +557,6 @@
       .dot.live{animation:pulse 1.6s ease-in-out infinite}
       @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
 
-      /* ---------- Brand banner (logo above main menu, links to GitHub org) ---------- */
-      .brand-banner {
-        background: var(--outer);
-        border-bottom: 1px solid var(--border-soft);
-        padding: 10px 18px;
-        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-        width: 100%; box-sizing: border-box;
-      }
-      .brand-banner-title {
-        font-family: "Rajdhani", sans-serif; font-weight: 700; font-size: 15px;
-        letter-spacing: 3px; text-transform: uppercase; color: var(--muted);
-      }
-      .brand-banner a { display: inline-flex; align-items: center; }
-      .brand-banner a:hover { text-decoration: none; }
-      .brand-banner img { display: block; height: 84px; width: auto; }
-
       /* Nav strip */
       .nav-strip{
         background:var(--nav-bg); border:1px solid var(--line); border-top:none;
@@ -952,11 +936,6 @@
         </div>
       </header>
 
-      <div class="brand-banner">
-        <div class="brand-banner-title">CTP Music Organization</div>
-        <a href="https://github.com/ctp-music" target="_blank" rel="noopener" title="CTP Music on GitHub — visit the organization page"><img src="assets/branding/ctp-music-org-avatar.jpg" alt="CTP Music" width="460" height="460" /></a>
-      </div>
-
       <nav class="nav-strip" aria-label="Portal sections">
         <a href="#top">Home</a>
         <a href="#radio-wall">Radio Wall</a>
@@ -1017,6 +996,10 @@
 
         <!-- ============ LEFT COLUMN: menus ============ -->
         <div class="col col-left">
+          <section class="block" aria-label="CTP Music Organization">
+            <div class="block-title">CTP Music Organization</div>
+            <div class="block-body" style="line-height:0;"><a href="https://github.com/ctp-music" target="_blank" rel="noopener" title="CTP Music on GitHub — visit the organization page"><img src="assets/branding/ctp-music-org-avatar.jpg" alt="CTP Music" width="460" height="460" style="display:block; width:100%; height:auto;" /></a></div>
+          </section>
           <section class="block" aria-label="Main menu">
             <div class="block-title">Main Menu</div>
             <div class="block-body" style="padding:4px 10px">
