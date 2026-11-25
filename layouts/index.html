@@ -1,0 +1,171 @@
+{{ define "main" }}
+<div class="layout" id="top">
+{{ partial "sidebar-left.html" . }}
+<main class="col col-center">
+<div class="hero">
+            <img src="assets/banners/ctp-music-banner.webp" alt="CTP Music banner: a ringed planet and flowing sound waves in a violet nebula, reading CTP Music — CTP Music Universe, explore the cosmos of community sounds" width="2352" height="1008" />
+          </div>
+          <div class="hero-strip">
+            <span class="hs-text">The portal itself — radio, artists and community in one place.</span>
+            <span style="margin-left:auto; display:flex; gap:8px; flex-wrap:wrap">
+              <button type="button" class="btn btn-primary" data-play-channel="ctp-01">Listen Live</button>
+              <a class="btn" href="#radio-wall">Radio Wall</a>
+            </span>
+          </div>
+
+          <section class="block" aria-label="Welcome">
+            <div class="block-title">CTP Music Universe</div>
+            <div class="block-body">
+              <h2 class="sec">Music is the entry point</h2>
+              <p>CTP Music is a digital music and media ecosystem inside the CTPVerse — internet radio discovery, independent artists, original CTP content and a living community, built on a lean modular stack instead of one heavy platform. A listener does not simply consume music here: they can become a community member, a student, a supporter, a creator, a Club CTP participant.</p>
+              <div class="eco" style="margin-top:10px">
+                <div class="cell"><b>Discovery</b><span>Independent artists, unique radio channels, emerging creators, original CTP content.</span></div>
+                <div class="cell"><b>Community</b><span>Direct relationships between artists, fans, members and creators.</span></div>
+                <div class="cell"><b>Ownership</b><span>CTP controls the brand, the experience, the community relationship and the membership ecosystem.</span></div>
+                <div class="cell"><b>Expansion</b><span>A foundation ready for CTP-EOS, CTP University, hardware and future digital experiences.</span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block" id="featured" aria-label="Featured artist">
+            <div class="block-title">Featured Artist</div>
+            <div class="block-body">
+              <h2 class="sec">Cosmic Echoes</h2>
+              <img class="artist-img" src="assets/featured/cosmic-echoes.webp" alt="Illustration of a producer at a mixing console facing concentric cyan sound-wave rings in a nebula — artwork for Cosmic Echoes" width="1920" height="1280" loading="lazy" />
+              <p style="margin-top:10px">Psytrance and techno-spiritual soundscapes: a producer at the console, broadcasting concentric waves into the C-domain. Cosmic Echoes holds the portal's first Featured Artist slot — the sound the Radio Wall was tuned around.</p>
+              <div class="btn-row">
+                <button type="button" class="btn btn-primary" data-play-channel="ctp-01">Hear it on Psytrancelicious</button>
+                <a class="btn" href="#bandcamp">Artist releases</a>
+              </div>
+            </div>
+          </section>
+
+          <div class="muse-banner">
+            <a href="https://muse.ai/join" target="_blank" rel="noopener" aria-label="Support CTP Dev — try Muse: join Muse and your signup helps fund CTP dev work">
+              <img src="assets/banners/muse-banner.webp" alt="CTP Music Portal banner: Support CTP Dev — Try Muse. Your signup helps fund CTP dev work." width="2736" height="912" />
+            </a>
+            <p class="muse-code">Use code 66FX8O</p>
+            <p class="muse-caption">Join Muse through my link and redeem code 66FX8O in Settings within 48 hours of joining — we both get 1 billion Muse tokens.</p>
+          </div>
+
+          <section class="block" aria-label="Latest in the community">
+            <div class="block-title">Latest in the Community</div>
+            <div class="block-body">
+              <ul class="feed">
+                <li><span class="tag">On Air</span><div><span class="ft">Psytrancelicious is broadcasting</span><p>Astral Projection's “Mahadeva” in rotation on the network's psytrance channel — the player in the right column is tuned to it.</p></div></li>
+                <li><span class="tag">Featured</span><div><span class="ft">Cosmic Echoes takes the Featured Artist slot</span><p>The first artist spotlight on the portal. Artist releases in the Bandcamp layer below are curated by the portal team. Artist submissions are closed during Alpha.</p></div></li>
+                <li><span class="tag">New</span><div><span class="ft">The Radio Wall is up: ten channels</span><p>Ten channels on one wall, from psytrance and ambient to synthwave, talk and classical. Click any channel to pull up its player — Psytrancelicious plays live now; the rest will switch on as their streams go live.</p></div></li>
+                <li><span class="tag">Poll</span><div><span class="ft">Community poll is open</span><p>Favorite electronic subgenre — cast a vote below and see where the community lands.</p></div></li>
+                <li><span class="tag">Club</span><div><span class="ft">Club CTP tiers published</span><p>Five tiers, Explorer to Founder's Circle — the membership and identity layer of the whole CTP ecosystem.</p></div></li>
+              </ul>
+            </div>
+          </section>
+
+          <section class="block" id="poll" aria-label="Community poll">
+            <div class="block-title">Community Poll</div>
+            <div class="block-body">
+              <h2 class="sec" style="font-size:16px">What's your favorite electronic subgenre?</h2>
+              <form id="pollForm">
+                <label class="poll-opt"><input type="radio" name="subgenre" value="Psytrance" /> Psytrance</label>
+                <label class="poll-opt"><input type="radio" name="subgenre" value="IDM" /> IDM</label>
+                <label class="poll-opt"><input type="radio" name="subgenre" value="Ambient" /> Ambient</label>
+                <label class="poll-opt"><input type="radio" name="subgenre" value="Synthwave" /> Synthwave</label>
+                <label class="poll-opt"><input type="radio" name="subgenre" value="Industrial" /> Industrial</label>
+                <label class="poll-opt"><input type="radio" name="subgenre" value="Dark Ambient" /> Dark Ambient</label>
+                <div class="btn-row">
+                  <button type="submit" class="btn btn-primary">Vote</button>
+                  <span class="small muted" id="pollMsg" role="status"></span>
+                </div>
+              </form>
+              <div class="poll-res" id="pollResults" hidden></div>
+            </div>
+          </section>
+
+          <section class="block" id="radio-wall" aria-label="Radio wall">
+            <div class="block-title">Radio Wall</div>
+            <div class="block-body">
+              <h2 class="sec">Every channel on one wall</h2>
+              <p>Click a channel card and that channel's player comes up — stream, genre and now-playing, ready to listen. Live channels play straight away; the rest are on the wall and coming soon.</p>
+              <div class="wall" id="chanWall" style="margin-top:10px"><!-- channel cards built from the internal channel data --></div>
+            </div>
+          </section>
+
+          <section class="block" id="bandcamp" aria-label="Bandcamp curated artist releases">
+            <div class="block-title">Bandcamp — Curated Artist Releases</div>
+            <div class="block-body">
+              <h2 class="sec">Curated releases only</h2>
+              <p>Bandcamp is the portal's artist layer: releases, artist pages and direct support for the artist. Every player in this section is selected and added by the portal team — there is no public submission or upload route on this page.</p>
+
+              <div class="alpha-note">
+                <p style="margin:0"><span class="alpha-badge">Alpha</span><b>Artist submissions are closed during Alpha.</b> How submissions will be structured is still being decided, so nothing can be submitted here yet. This section carries curated releases only until that structure is in place.</p>
+              </div>
+
+              <h3 class="sub">Curated releases</h3>
+              <div id="bcStack" class="bc-slot">
+                <div class="empty-releases">
+                  <b>No curated releases published yet</b>
+                  <span class="small muted">The first curated Bandcamp players, selected by the portal team, will appear here.</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block" id="club" aria-label="Club CTP membership">
+            <div class="block-title">Club CTP — Membership</div>
+            <div class="block-body">
+              <h2 class="sec">Listeners → Members → Participants → Contributors</h2>
+              <p>Club CTP is the membership and identity layer connecting the whole CTP ecosystem — CTP Music, CTP University and CTP-EOS under one membership. The portal comes first and the Marketplace later: community first, commerce second.</p>
+              <div class="tiers-row">
+                <div class="tier"><h3>Explorer</h3><div class="price">Free</div><p class="small muted">Entry point into the CTP Music ecosystem.</p><ul><li>Public music access</li><li>Community discovery</li><li>Basic content access</li></ul></div>
+                <div class="club-banner">
+                  <div class="cb-title">One membership across the whole CTP ecosystem</div>
+                  <p>Listeners become Members, Members become Participants, Participants become Contributors. Club CTP is the identity layer that carries that journey across CTP Music, CTP University and CTP-EOS — under one membership.</p>
+                  <p class="cb-line">Community first, commerce second — the portal comes first, the Marketplace later.</p>
+                </div>
+              </div>
+              <div class="tiers-row">
+                <div class="tier"><h3>Member</h3><span class="metal metal-bronze">Bronze</span><div class="price">$5<span> /mo · $50/yr</span></div><p class="small muted">Standard community membership.</p><ul><li>Expanded content access</li><li>Member channels</li><li>Community participation</li><li>Special announcements</li></ul></div>
+                <div class="tier"><h3>Premium</h3><span class="metal metal-silver">Silver</span><div class="price">$15<span> /mo · $150/yr</span></div><p class="small muted">Dedicated supporters.</p><ul><li>Exclusive releases</li><li>Premium audio libraries</li><li>Private experiences</li><li>Early access content</li></ul></div>
+                <div class="tier"><h3>Patron</h3><span class="metal metal-gold">Gold</span><div class="price">$50<span> /mo · $500/yr</span></div><p class="small muted">High-value supporters and ecosystem participants.</p><ul><li>Priority access</li><li>Recognition</li><li>Special releases</li><li>Premium community experiences</li></ul></div>
+                <div class="tier"><h3>Founder's Circle</h3><span class="metal metal-platinum">Platinum</span><div class="price">Custom</div><p class="small muted">Strategic supporters of the CTP ecosystem.</p><ul><li>Recognition</li><li>Exclusive access</li><li>Private opportunities</li><li>Long-term ecosystem participation</li></ul></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="block" id="ecosystem" aria-label="Ecosystem and architecture">
+            <div class="block-title">The Ecosystem &amp; The Stack</div>
+            <div class="block-body">
+              <h2 class="sec">One layer of the CTPVerse</h2>
+              <div class="eco">
+                <div class="cell"><b>CTP Music</b><span>Music · Artists · Media · Community</span></div>
+                <div class="cell"><b>CTP University</b><span>Education · Courses · Knowledge · Content</span></div>
+                <div class="cell"><b>CTP-EOS</b><span>Operating System · Hardware · Platform</span></div>
+                <div class="cell"><b>Club CTP</b><span>Membership · Identity · Benefits · Access</span></div>
+              </div>
+              <h3 class="sub">Modular architecture — each layer does one job</h3>
+              <ul style="margin:0; padding-left:17px">
+                <li><b>Experience layer</b> — this portal, a static site on GitHub Pages (Vercel later, if community and database elements call for it).</li>
+                <li><b>Media infrastructure</b> — Cloudflare R2 object storage with CDN delivery for CTP's own audio assets.</li>
+                <li><b>Internet radio layer</b> — laut.fm streams powering the Radio Wall and the player.</li>
+                <li><b>Artist ecosystem layer</b> — Bandcamp releases and artist pages — the curated releases above.</li>
+                <li><b>Membership layer</b> — Club CTP identity, access and tiers.</li>
+              </ul>
+              <p style="margin-top:8px">Separating the layers keeps the portal lean, secure and cheap to run — and free to scale when the community does.</p>
+            </div>
+          </section>
+
+          <section class="block" id="roadmap" aria-label="Roadmap">
+            <div class="block-title">Roadmap</div>
+            <div class="block-body">
+              <div class="phases">
+                <div class="phase"><b>Phase 1 — Foundation</b>Launch a fully functional CTP Music ecosystem.<ul><li>GitHub Pages portal</li><li>Custom player + Radio Wall</li><li>laut.fm streams + curated Bandcamp releases</li><li>Initial artist pages &amp; media library</li><li>Club CTP foundation</li></ul></div>
+                <div class="phase"><b>Phase 2 — Community</b>Increase participation, convert visitors into members.<ul><li>Member profiles</li><li>Community features</li><li>Artist promotion tools</li><li>Events</li><li>Premium content</li></ul></div>
+                <div class="phase"><b>Phase 3 — Monetization</b>Develop the revenue engines.<ul><li>Membership tiers live</li><li>Advertising &amp; sponsorships</li><li>Artist services</li><li>Commerce — the Marketplace</li></ul></div>
+                <div class="phase"><b>Phase 4 — Ecosystem Integration</b>Connect the CTP platforms.<ul><li>CTP-EOS integration</li><li>CTP University</li><li>CTP computer systems</li><li>Future digital experiences</li></ul></div>
+              </div>
+            </div>
+          </section>
+</main>
+{{ partial "sidebar-right.html" . }}
+</div>
+{{ end }}
