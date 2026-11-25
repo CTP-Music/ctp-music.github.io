@@ -1,0 +1,8 @@
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="color-scheme" content="light dark" />
+<link rel="icon" href="{{ "assets/branding/ctp-music-org-avatar.jpg" | relURL }}" />
+<title>CTP Music Portal</title>
+<meta name="description" content="CTP Music Portal — the CTP Music Universe. Internet radio, independent artists and community sounds from the CTPVerse: laut.fm radio channels, Bandcamp artists, Club CTP." />
+{{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" />
