@@ -2,14 +2,13 @@
    ONE change: .site-head h1 color #ffffff -> var(--mark-text)
    (masthead sync: the CTP box letters and the title must be the
    same colour in every theme). No url() references exist in this
-   CSS, so no path rewriting was needed. The stale comment
-   'All 41 CTPVerse Dashboard themes' is preserved as-is. */
+   CSS, so no path rewriting was needed. */
 
       /* Phone tap targets: at least 36px tall for standalone controls. */
       button, [role="button"], select, summary, input:not([type="checkbox"], [type="radio"]) { min-height: 2.25rem; }
     
 
-      /* ===== All 41 CTPVerse Dashboard themes, carried over verbatim so the
+      /* ===== All 52 CTPVerse Dashboard themes, carried over verbatim so the
            portal themes match the dashboard exactly ===== */
   /* CTP CALAMARES — the CTP-EOS installer palette: near-black teal #0A0F14, CTP-EOS cyan #2AA5C4, light cyan #7ED4E8 */
   :root[data-theme="calamares"]{
