@@ -668,9 +668,10 @@
         display:flex; align-items:center; gap:14px; padding:14px 16px; flex-wrap:wrap;
       }
       .mark{
-        background:var(--mark-bg); color:var(--mark-text); font-family:Tahoma,Verdana,sans-serif;
-        font-weight:bold; font-size:19px; letter-spacing:.04em; padding:10px 12px;
+        width:52px; height:52px; background:var(--mark-bg); color:var(--mark-text); font-family:Tahoma,Verdana,sans-serif;
+        font-weight:bold; font-size:19px; letter-spacing:.04em;
         border:1px solid var(--line); line-height:1; white-space:nowrap;
+        display:flex; align-items:center; justify-content:center; flex:0 0 auto;
       }
       .site-head h1{
         font-family:Tahoma,Verdana,sans-serif; font-size:30px; line-height:1.05; margin:0;
