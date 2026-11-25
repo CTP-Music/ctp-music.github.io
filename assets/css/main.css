@@ -10,7 +10,7 @@
 
       /* ===== All 52 CTPVerse Dashboard themes, carried over verbatim so the
            portal themes match the dashboard exactly ===== */
-  /* CTP CALAMARES — the CTP-EOS installer palette: near-black teal #0A0F14, CTP-EOS cyan #2AA5C4, light cyan #7ED4E8 */
+  /* CTP-EOS CALAMARES — the CTP-EOS installer palette: near-black teal #0A0F14, CTP-EOS cyan #2AA5C4, light cyan #7ED4E8 */
   :root[data-theme="calamares"]{
     color-scheme:dark;
     --navy:#2AA5C4; --navy-dark:#7ED4E8; --blue:#2AA5C4; --blue-mid:#4CB8D4;
