@@ -850,7 +850,7 @@
          Full removes the cap and widens both side columns to 280px */
       :root, :root[data-width="nuke"]{--page-max:1180px}
       :root[data-width="full"]{--page-max:none}
-      .wrap{max-width:var(--page-max); margin:0 auto; padding:8px}
+      .wrap{max-width:var(--page-max); margin:0 auto}
       @media (min-width:1081px){
         :root[data-width="full"] .layout{grid-template-columns:280px minmax(0,1fr) 280px}
       }
